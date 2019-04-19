@@ -1,0 +1,38 @@
+@charset "UTF-8";
+.monitor-logo {
+    padding: 0px;
+    color: rgba(0, 0, 0, 1);
+    font-size: 36px;
+    background-color: rgba(22,160,133,1);
+}
+
+.monitor-leave {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.monitor-content {
+    padding: 20px;
+}
+
+.post-content {
+	background-color: #8ACFC2;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	height: auto;
+	box-shadow: 5px 5px 5px darkgreen;
+	padding: 20px 40px;
+	word-wrap:break-word;
+}
+
+.comment-content {
+	background-color: #90EE90;
+	margin-top: 10px;
+}
+
+body {
+    height:100%;
+    background:#16a085;
+}
+

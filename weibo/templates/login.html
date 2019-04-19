@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+</head>
+
+<body>
+	<div class="login_form">
+		<div class="logo">Weibo</div>
+		<ul class="tabs" data-tabs id="example-tabs">
+			<li id="login_tab" class="tabs-title is-active"><a href="#login" aria-selected="true" style="font-size: 16px; font-weight: 600;">Login</a></li>
+			<li id="registration_tab" class="tabs-title"><a href="#registration" style="font-size: 16px; font-weight: 600;">Registration</a></li>
+		</ul>
+
+		<div class="tabs-content" data-tabs-content="example-tabs">
+			<div class="tabs-panel is-active" id="login_panel">
+				<form>
+					<div class="row">
+						<div class="medium-6 columns login_input">
+							<label>Email
+        <input id="login_email" type="email" placeholder="Enter your Email Address">
+      </label>
+						</div>
+						<div class="medium-6 columns login_input">
+							<label>Password
+        <input id="login_password" type="password" placeholder="Enter your Password">
+      </label>
+						</div>
+						<div class="medium-6 columns login_input">
+							<button id="login_submit" type="button" class="success button" style="width: 100%;">Login</button></div>
+					</div>
+					<div id="login_alert" class="callout alert" style="margin: 15px; display: none;">
+					</div>
+				</form>
+			</div>
+			<div class="tabs-panel" id="registration_panel">
+				<form>
+					<div class="row">
+						<div class="medium-6 columns login_input">
+							<label>Email
+        <input id="registration_email" type="email" placeholder="Enter your Email Address">
+      </label>
+						</div>
+
+						<div class="medium-6 columns login_input">
+							<label>Password
+        <input id="registration_password" type="password" placeholder="Enter your Password">
+      </label>
+
+						</div>
+						<div class="medium-6 columns login_input">
+							<label>Password confirmation
+        <input id="registration_confirm" type="password" placeholder="Confirm your password">
+      </label>
+						</div>
+						<div class="medium-6 columns login_input">
+							<button id="registration_submit" type="button" class="success button" style="width: 100%;">Registration</button></div>
+					</div>
+			</div>
+			<div id="registration_alert" class="callout alert" style="margin: 15px; display: none;">
+
+			</div>
+			<div id="registration_success" class="callout success" style="margin: 15px; display: none;"></div>
+			</form>
+		</div>
+	</div>
+
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/foundation.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/exporting.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/Particleground.js') }}"></script>
+</body>
+
+</html>

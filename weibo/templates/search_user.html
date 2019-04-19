@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Search Result</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/monitor.css') }}" />
+</head>
+
+<body>
+	<div class="top-bar" style="background-color: rgba(22, 160, 133, 0);">
+		<div class="top-bar-left">
+			<a style="color: black;text-decoration:underline" href="{{ url_for('home') }}">click here to go back home Page</a>
+		</div>
+		<div class="top-bar-right">
+			<button id="leave-btn" type="button" class="alert button monitor-leave">Logout</button>
+		</div>
+	</div>
+	<div class="monitor-content">
+	{% if res%}
+		{% for i in res%}
+		<p style="display: inline"> 
+			{{i[0]}}
+		</p>
+		<p style="display: inline;float: right">
+			{% if session['login_id'] != i[1] %}
+				{% if i[2]%}
+				<a href="{{ url_for('unfollow', user2_id=i[1]) }}" style="float: right" type="button" class="small success button">Unfollow</a>
+				{% else %}
+				<a href="{{ url_for('follow', user2_id=i[1]) }}" style="float: right" type="button" class="small success button">Follow</a>
+				{% endif %}
+			{% endif %}
+		</p>
+		<hr style="height:2px;border:none;border-top:2px dotted #185598;"/>
+		{% endfor %}
+	{% else %}
+		<p> no result! </p>
+	{% endif %}
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/foundation.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/exporting.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/changepwd.js') }}"></script>
+</body>
+
+</html>

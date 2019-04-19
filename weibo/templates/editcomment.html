@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Comment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/monitor.css') }}" />
+</head>
+
+<body>
+	<div class="top-bar" style="background-color: rgba(22, 160, 133, 0);">
+		<div class="top-bar-left">
+			<a style="color: black;text-decoration:underline" href="{{ url_for('home') }}">click here to go back home Page</a>
+		</div>
+		<div class="top-bar-right">
+			<button id="leave-btn" type="button" class="alert button monitor-leave">Logout</button>
+		</div>
+	</div>
+	<div class="monitor-content">
+    <h1>Edit Comment</h1>
+    <form method="post">
+        <textarea id="editcomment-content" rows="4" >{{content}}</textarea>
+        <input id="comment-id" type="hidden" value="{{comment_id}}"/>
+        <button id="editcomment-btn" style="float: right" type="button" class="success button">Update</button><br/>
+    </form>
+    </div>
+    <div id="editcomment_alert" class="callout alert" style="margin: 40px; display: none;"></div>
+	<div id="editcomment_success" class="callout success" style="margin: 40px; display: none;"></div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/foundation.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/exporting.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/editcomment.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Home Page</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/monitor.css') }}" />
+</head>
+
+<body>
+	<div class="top-bar" style="background-color: rgba(22, 160, 133, 0);">
+		<div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+				<li class="menu-text monitor-logo">Home Page</li>
+			</ul>
+		</div>
+		<div class="small-5 columns">
+			<form action="{{ url_for('search_user') }}" method="post">
+				<input style="display: inline" type="search" class="top-bar input" name="search" placeholder="Enter user Email">
+				<input style="display: inline;margin:auto" type="submit" class="success button top-bar input.button" value="Search User">
+			</form>
+		</div>
+		<div class="top-bar-right">
+			<ul class="menu" style="background-color: rgba(22, 160, 133, 0);">
+				<li><button id="changepwd-btn" type="button" class="alert button monitor-leave">Change Password</button>&nbsp</li>
+				<li><button id="leave-btn" type="button" class="alert button monitor-leave">Logout</button></li>
+			</ul>
+		</div>
+	</div>
+	<div class="monitor-content">
+		Hello <strong>{{session['login_email']}}</strong>! You have posted {{count[0]}} weibos!<br/>
+		You have <a style="color: black;text-decoration:underline" href="{{ url_for('follower') }}">{{count[1]}} followers</a>! You have <a style="color: black;text-decoration:underline" href="{{ url_for('following') }}">{{count[2]}} followings</a>!<br/>
+	</div>
+	<div class="monitor-content">
+		<p style="font-size:30px">Is there anything new you want to tell?</p>
+        <form action="/home" method="post">
+            <textarea id="content" rows="4" ></textarea>
+            <button id="post-btn" style="float: right" type="button" class="success button">Post</button><br/>
+        </form>
+    </div>
+    <div id="post_alert" class="callout alert" style="margin: 40px; display: none;"></div>
+	<div id="post_success" class="callout success" style="margin: 40px; display: none;"></div>
+	<br/>
+	<div class="monitor-content">
+		{% for i in posts%}
+		<div class="post-content">
+		<p style="color:#2B2B2B">{{i[0]}} ({{i[3].strftime('%Y-%m-%d %H:%M:%S')}})</p>
+		{{i[2]}}
+			{% if i[0]==session['login_email'] %}
+			<div style="float: right;margin:auto">
+			<a style="color: black;text-decoration:underline" href="{{ url_for('edit_post',post_id=i[1]) }}">edit</a>&nbsp;
+			<a style="color: black;text-decoration:underline" href="{{ url_for('delete_post',post_id=i[1]) }}">delete</a>
+			</div>
+			{% endif %}
+			<div style="float: right;margin:auto">
+				{% if i[5] %}
+				<a style="color: black;text-decoration:underline" href="{{ url_for('unlike_post',post_id=i[1]) }}">unlike({{i[4]}})</a>&nbsp;
+				{% else %}
+				<a style="color: black;text-decoration:underline" href="{{ url_for('like_post',post_id=i[1]) }}">like({{i[4]}})</a>&nbsp;
+				{% endif %}
+			</div>
+			<hr style=" height:2px;border:none;border-top:2px dotted #185598;"/>
+			<form method="post" action="{{ url_for('add_comment', post_id=i[1]) }}">
+				<input type="text" name="comment" required>
+				<input type="submit" style="float: right" class="small success button" value="Add comment">
+            </form>
+            <br/><br/>
+			
+			{% for j in comments %}
+				{% if j[2] == i[1] %}
+				<div class="comment-content">
+					<p style="color:#2B2B2B">{{j[1]}} ({{j[3].strftime('%Y-%m-%d %H:%M:%S')}})</p>
+					{{j[4]}}
+					{% if j[1]==session['login_email'] %}
+						<div style="float: right;margin:auto">
+						<a style="color: black;text-decoration:underline" href="{{ url_for('edit_comment',comment_id=j[0]) }}">edit</a>
+						<a style="color: black;text-decoration:underline" href="{{ url_for('delete_comment',comment_id=j[0]) }}">delete</a>
+						</div>
+					{% endif %}
+					<div style="float: right;margin:auto">
+						{% if j[6] %}
+						<a style="color: black;text-decoration:underline" href="{{ url_for('unlike_comment',comment_id=j[0]) }}">unlike({{j[5]}})</a>&nbsp;
+						{% else %}
+						<a style="color: black;text-decoration:underline" href="{{ url_for('like_comment',comment_id=j[0]) }}">like({{j[5]}})</a>&nbsp;
+						{% endif %}
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+			
+		</div>
+		{% endfor %}
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/foundation.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/exporting.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/monitor.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/theme.js') }}"></script>
+	
+</body>
+
+</html>
